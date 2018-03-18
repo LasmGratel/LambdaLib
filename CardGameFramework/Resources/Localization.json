@@ -1,0 +1,51 @@
+﻿{
+  "Commands": {
+    "Join-Game": {
+      "Name": "加入游戏",
+      "Verb": "Join",
+      "Noun": "Game",
+      "Description": "加入所选择的游戏。"
+    },
+    "Leave-Game": {
+      "Name": "离开游戏",
+      "Verb": "Leave",
+      "Noun": "Game",
+      "Description": "离开所选择的游戏。"
+    },
+    "Get-Point": {
+      "Name": "获取积分",
+      "Matches": [ "我没钱了", "梅钱", "获取积分" ],
+      "Description": "每{0}获取{1}积分。"
+    },
+    "Set-Point": {
+      "Name": "设置积分",
+      "Verb": "Set",
+      "Noun": "Point",
+      "Description": "对制定玩家设置积分。"
+    },
+    "End-Game": {
+      "Name": "结束游戏",
+      "Verb": "End",
+      "Noun": "Game",
+      "Description": "结束当前上下文的游戏。"
+    }
+  },
+  "NVMatcher": {
+    "Separators": [ "-" ],
+    "Ignores": [ "!", "！", ".", "。" ],
+    "Verbs": {
+      "Get": [ "Get", "获取" ],
+      "Set": [ "Set", "设置" ],
+      "Join": [ "Join", "加入", "上" ],
+      "Leave": [ "Leave", "Quit", "离开", "退出" ],
+      "End": [ "End", "Stop", "结束" ]
+    },
+    "Nouns": {
+      "Point": [ "Point", "积分" ],
+      "Game": [ "Game", "Desk", "卓", "游戏" ]
+    }
+  },
+  "MoneyFactory": {
+    "MoneyPostfix": "Cy币"
+  }
+}
