@@ -1,9 +1,9 @@
-﻿namespace CardGameFramework.Rules
-{
-    public interface IRequirement
-    {
-        string Name { get; }
+﻿using CardGameFramework.GameComponent;
 
+namespace CardGameFramework.Rules
+{
+    public interface IRequirement : IIdentifiable<string>
+    {
         bool IsMatch(in RuleContext context);
     }
 
@@ -14,7 +14,7 @@
 
     public abstract class RequirementBase : IRequirement
     {
-        public abstract string Name { get; }
+        public abstract Identifier<string> Identifier { get; }
 
         public abstract bool IsMatch(in RuleContext context);
 

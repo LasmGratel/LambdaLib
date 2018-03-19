@@ -12,7 +12,7 @@ namespace CardGameFramework.Rules
         private static ParamRequirementBase<AmountParam> _example1 =>
             RequirementFactory.Create<AmountParam>("Amount", (context, param) => context.LastCards.First().Amount == param.Amount);
 
-        private static IRequirement _example2 { get; } = RequirementFactory.Create("Id", context => context.Desk.Id == "CNM");
+        private static IRequirement _example2 { get; } = RequirementFactory.Create("Id", context => context.Desk.Identifier == "CNM");
 
         private void Test()
         {

@@ -5,8 +5,14 @@ using CardGameFramework.Rules;
 
 namespace CardGameFramework.GameComponent
 {
-    class Game
+    public class Game : IIdentifiable<string>
     {
+        public Game(Identifier<string> identifier)
+        {
+            Identifier = identifier;
+        }
+
         public ICollection<Rule> Rules { get; }
+        public Identifier<string> Identifier { get; }
     }
 }

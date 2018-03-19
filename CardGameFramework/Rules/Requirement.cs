@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CardGameFramework.GameComponent;
 
 namespace CardGameFramework.Rules
 {
     public class Requirement : RequirementBase
     {
-        public Requirement(string name, Predicate<RuleContext> predicate)
+        public Requirement(string identifier, Predicate<RuleContext> predicate)
         {
-            Name = name;
+            Identifier = Identifier<string>.Of(identifier);
             Predicate = predicate;
         }
 
-        public override string Name { get; }
+        public override Identifier<string> Identifier { get; }
         public Predicate<RuleContext> Predicate { get; }
 
         public override bool IsMatch(in RuleContext context)
@@ -21,12 +22,12 @@ namespace CardGameFramework.Rules
         }
     }
 
-    public delegate bool Predicate2<in T1, in T2>(T1 t1, T2 t2);
+    public delegate bool BiPredicate<in T1, in T2>(T1 t1, T2 t2);
 
     public class ParameterRequirement<T> : ParamRequirementBase<T> where T : IRuleParameter
     {
-        public override string Name { get; }
-        public Predicate2<RuleContext, T> Predicate { get; }
+        public override Identifier<string> Identifier { get; }
+        public BiPredicate<RuleContext, T> Predicate { get; }
         public T Parameter { get; private set; }
 
         public override bool IsMatch(in RuleContext context)
@@ -34,9 +35,9 @@ namespace CardGameFramework.Rules
             return Predicate(context, Parameter);
         }
 
-        public ParameterRequirement(string name, Predicate2<RuleContext, T> predicate, T parameter = default)
+        public ParameterRequirement(string identifier, BiPredicate<RuleContext, T> predicate, T parameter = default)
         {
-            Name = name;
+            Identifier = Identifier<string>.Of(identifier);
             Predicate = predicate;
             Parameter = parameter;
         }
@@ -50,11 +51,11 @@ namespace CardGameFramework.Rules
 
     public class RequirementFactory
     {
-        public static Requirement Create(string name, Predicate<RuleContext> predicate) =>
-            new Requirement(name, predicate);
+        public static Requirement Create(string identifier, Predicate<RuleContext> predicate) =>
+            new Requirement(identifier, predicate);
 
-        public static ParameterRequirement<T> Create<T>(string name, Predicate2<RuleContext, T> predicate, T parameter = default) where T : IRuleParameter =>
-            new ParameterRequirement<T>(name, predicate, parameter);
+        public static ParameterRequirement<T> Create<T>(string identifier, BiPredicate<RuleContext, T> predicate, T parameter = default) where T : IRuleParameter =>
+            new ParameterRequirement<T>(identifier, predicate, parameter);
     }
 
     public interface IRuleParameter

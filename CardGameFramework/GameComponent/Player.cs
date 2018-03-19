@@ -4,13 +4,13 @@ using System.Text;
 
 namespace CardGameFramework.GameComponent
 {
-    public class Player
+    public class Player : IIdentifiable<string>
     {
-        public Player(PlayerID id)
+        public Player(Identifier<string> identifier)
         {
-            ID = id;
+            Identifier = identifier;
         }
 
-        public PlayerID ID { get; }
+        public Identifier<string> Identifier { get; }
     }
 }
